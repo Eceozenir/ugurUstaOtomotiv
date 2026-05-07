@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uğur Usta Otomotiv – Ağır Vasıta Teknik Servis & Yol Yardım</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* SLIDER */
+    .slider { position: relative; width: 100%; overflow: hidden; background: var(--green); height: 650px; }
+    .slider-track { display: flex; height: 100%; transition: transform 0.6s ease; }
+    .slide {
+      min-width: 100%; height: 100%;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden; background: var(--green);
+    }
+    .slide-bg {
+      position: absolute; inset: 0;
+      background-size: cover; background-position: center; opacity: 0.18;
+    }
+    .slide-content { position: relative; z-index: 2; padding: 0 80px; max-width: 680px; }
+    .slide-content .eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,.55); margin-bottom: 14px;
+    }
+    .slide-content h2 {
+      font-size: clamp(28px, 4vw, 52px); font-weight: 900; color: #fff;
+      text-transform: uppercase; line-height: 1.05; letter-spacing: -0.5px; margin-bottom: 16px;
+    }
+    .slide-content p { font-size: 15px; color: rgba(255,255,255,.7); line-height: 1.7; margin-bottom: 28px; max-width: 480px; }
+    .slide-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+    .slider-prev, .slider-next {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 10;
+      background: rgba(255,255,255,.12); border: none; color: #fff; font-size: 24px;
+      width: 50px; height: 50px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; transition: background .2s;
+    }
+    .slider-prev:hover, .slider-next:hover { background: rgba(255,255,255,.25); }
+    .slider-prev { left: 20px; }
+    .slider-next { right: 20px; }
+    .slider-dots { position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+    .slider-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.35); cursor: pointer; border: none; transition: background .2s; }
+    .slider-dot.active { background: #fff; }
+
+    /* STATS */
+    .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--border); }
+    .stat-cell { padding: 26px 20px; text-align: center; border-right: 1px solid var(--border); background: var(--white); }
+    .stat-cell:last-child { border-right: none; }
+    .stat-num { font-size: 36px; font-weight: 900; color: var(--green); line-height: 1; margin-bottom: 5px; }
+    .stat-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* NEDEN BİZ */
+    .about-section {
+      padding: 64px 40px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+    }
+    .about-left h2 { font-size: 12px; font-weight: 700; color: var(--green3); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+    .about-left h3 { font-size: 28px; font-weight: 900; color: var(--text); line-height: 1.15; margin-bottom: 18px; letter-spacing: -0.3px; }
+    .about-left h3 strong { color: var(--green); }
+    .about-left p { font-size: 14px; color: var(--muted); line-height: 1.85; margin-bottom: 12px; }
+    .check-list { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .check-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: var(--text); }
+    .check-item::before {
+      content: '✓'; width: 22px; height: 22px; background: var(--green); color: #fff;
+      font-size: 11px; font-weight: 900; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .about-right { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .neden-card { background: var(--offwhite); border: 1px solid var(--border); border-top: 3px solid var(--green); padding: 22px 18px; border-radius: 4px; }
+    .neden-card .icon { font-size: 26px; margin-bottom: 10px; }
+    .neden-card h4 { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; text-transform: uppercase; }
+    .neden-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── HİZMETLER GRID (güncel) ── */
+    .hizmetler-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .hizmet-card {
+      background: var(--white);
+      padding: 28px 22px;
+      transition: background .2s;
+    }
+    .hizmet-card:hover { background: var(--offwhite); }
+    .hizmet-card .icon { font-size: 28px; margin-bottom: 12px; }
+    .hizmet-card h3 {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .hizmet-card p {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.65; margin-bottom: 14px;
+    }
+    .hizmet-card a {
+      font-size: 12px; font-weight: 700; color: var(--green);
+    }
+    .hizmet-card a:hover { text-decoration: underline; }
+
+    /* ── MARKA BÖLÜMÜ ── */
+    .mercedes-block {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .mercedes-left {
+      background: var(--green);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .mercedes-left .m-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: rgba(255,255,255,.5);
+      margin-bottom: 10px;
+    }
+    .mercedes-left .m-logo {
+      font-size: 38px; font-weight: 900; color: #fff;
+      letter-spacing: 2px; text-transform: uppercase;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .mercedes-left .m-sub {
+      font-size: 12px; color: rgba(255,255,255,.55);
+      line-height: 1.6;
+    }
+    .mercedes-right {
+      background: var(--offwhite);
+      padding: 32px 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+    .mercedes-right .m-title {
+      font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      color: var(--text); margin-bottom: 4px;
+    }
+    .mercedes-models {
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .m-model-tag {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--green);
+      padding: 6px 14px;
+      font-size: 12px; font-weight: 700;
+      color: var(--text); letter-spacing: 0.5px;
+      border-radius: 2px;
+    }
+    .mercedes-right .m-note {
+      font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1024px) { .hizmetler-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 768px) {
+      .slider { height: 400px; }
+      .slide-content { padding: 0 32px; }
+      .about-section { grid-template-columns: 1fr; gap: 36px; padding: 48px 20px; }
+      .about-right { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .hizmetler-grid { grid-template-columns: 1fr 1fr; }
+      .mercedes-block { grid-template-columns: 1fr; }
+      .mercedes-left { padding: 28px 24px; }
+    }
+    @media (max-width: 480px) {
+      .slider { height: 340px; }
+      .slide-content { padding: 0 20px; }
+      .hizmetler-grid, .about-right { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Merkez / Bolu</span>
+    <span>🕐 Pzt–Cmt 08:30–18:00 | Yol Yardım 7/24</span>
+    <span>✉ muhasebe@ugurusta.com.tr</span>
+    <span>✉ bilgi@ugurusta.com.tr</span>
+  </div>
+  <div class="topbar-right"><a href="tel:+905323512420">📞 0532 351 24 20</a></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-box">🔧</div>
+      <div class="nav-logo-text">
+        <strong>Uğur Usta Otomotiv</strong>
+        <span>Ağır Vasıta Teknik Servis</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Ana Sayfa</a></li>
+      <li><a href="hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+      <li><a href="iletisim.html">İletişim</a></li>
+      <li><a href="tel:+905323512420" class="nav-tel">📞 0532 351 24 20</a></li>
+    </ul>
+    <button class="hamburger" id="hb"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mn">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+    <a href="hizmetler.html">Hizmetlerimiz</a>
+    <a href="iletisim.html">İletişim</a>
+    <a href="tel:+905323512420">📞 0532 351 24 20</a>
+  </div>
+</nav>
+
+<!-- SLIDER -->
+<div class="slider">
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('/img/sliderr.jpeg');"></div>
+      <div class="slide-content">
+        <div class="eyebrow">Ağır Vasıta Uzmanı — Türkiye Geneli</div>
+        <h2>Güvenilir ve Profesyonel Teknik Servis</h2>
+        <p>Mercedes araçlarınız için 20 yılı aşkın tecrübemizle hizmetinizdeyiz.</p>
+        <div class="slide-btns">
+          <a href="tel:+905323512420" class="btn btn-white">📞 Hemen Ara</a>
+          <a href="hizmetler.html" class="btn btn-outline">Hizmetlerimiz</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('/img/tir.jpeg');"></div>
+      <div class="slide-content">
+        <div class="eyebrow">7/24 Yol Yardım Hattı</div>
+        <h2>Yolda Bırakmıyoruz!</h2>
+        <p>7 gün 24 saat yol yardım hizmetimizle arıza anında yanınızdayız.</p>
+        <div class="slide-btns">
+          <a href="tel:+905323512420" class="btn btn-white">📞 Yol Yardım</a>
+          <a href="iletisim.html" class="btn btn-outline">Konum Gönder</a>
+        </div>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="slide-bg" style="background-image:url('img/teknikServis.jpeg');"></div>
+      <div class="slide-content">
+        <div class="eyebrow">Orijinal Yedek Parça</div>
+        <h2>Motor, Şanzıman, Diferansiyel Tamiri</h2>
+        <p>Orijinal ve muadil yedek parça tedariki ve montajı.</p>
+        <div class="slide-btns">
+          <a href="hizmetler.html" class="btn btn-white">Hizmetleri Gör</a>
+          <a href="iletisim.html" class="btn btn-outline">İletişim</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="slider-prev" id="sPrev">&#8249;</button>
+  <button class="slider-next" id="sNext">&#8250;</button>
+  <div class="slider-dots" id="sDots"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row">
+  <div class="stat-cell"><div class="stat-num">20+</div><div class="stat-lbl">Yıl Tecrübe</div></div>
+  <div class="stat-cell"><div class="stat-num">7/24</div><div class="stat-lbl">Yol Yardım</div></div>
+  <div class="stat-cell"><div class="stat-num">5.000+</div><div class="stat-lbl">Tamamlanan İş</div></div>
+  <div class="stat-cell"><div class="stat-num">%98</div><div class="stat-lbl">Müşteri Memnuniyeti</div></div>
+</div>
+
+<!-- NEDEN BİZ -->
+<div class="about-section">
+  <div class="about-left">
+    <h2>Neden Uğur Usta?</h2>
+    <h3>Ağır Vasıta Araçların Bakım ve Onarımında <strong>Kurumsal Çözümler</strong></h3>
+    <p>Sunduğumuz geniş hizmet yelpazesi, müşterilerimizin her türlü tamir ihtiyaçları için bize gelmelerini sağlıyor. İşinin ehli ustalarımız, tamirat işinizin hızlı ve doğru yapılmasını garanti ediyor.</p>
+    <p>20 yılı aşkın tecrübemiz ve modern ekipmanlarımızla Mercedes ağır vasıtalara kalıcı çözüm üretiyoruz.</p>
+    <div class="check-list">
+      <div class="check-item">7/24 Yol Yardım Hizmeti</div>
+      <div class="check-item">Orijinal Yedek Parça Garantisi</div>
+      <div class="check-item">İşçilik Garantisi</div>
+    </div>
+  </div>
+  <div class="about-right">
+    <div class="neden-card"><div class="icon">🔧</div><h4>Uzman Kadro</h4><p>Sertifikalı ustalarımızla Mercedes araçlarında hızlı ve kalıcı onarım.</p></div>
+    <div class="neden-card"><div class="icon">🚛</div><h4>7/24 Yol Yardım</h4><p>Her an mobil ekibimiz arıza anında yanınızda.</p></div>
+    <div class="neden-card"><div class="icon">⚙️</div><h4>Geniş Parça Stoğu</h4><p>Orijinal ve muadil yedek parça, anında tedarik ve montaj hizmeti.</p></div>
+    <div class="neden-card"><div class="icon">✅</div><h4>İşçilik Garantisi</h4><p>Tüm onarım işlemlerimizde işçilik garantisi veriyoruz.</p></div>
+  </div>
+</div>
+
+<!-- HİZMETLER -->
+<div class="section section-bg">
+  <div class="sec-heading center">
+    <h2>Hizmetlerimiz</h2>
+    <p>Ağır vasıtanızın her türlü ihtiyacı için tek adres</p>
+  </div>
+  <div class="hizmetler-grid">
+    <div class="hizmet-card">
+      <div class="icon">🔧</div>
+      <h3>Mekanik Onarım</h3>
+      <p>Şanzıman, diferansiyel, aks, debriyaj ve tüm mekanik sistemlerin tamiri.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+    <div class="hizmet-card">
+      <div class="icon">⚙️</div>
+      <h3>Motor Revizyon</h3>
+      <p>Motor revizyonu, rektifiye, bakım ve tamiri. Kalıcı onarım garantisi.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+    <div class="hizmet-card">
+      <div class="icon">🛞</div>
+      <h3>Fren Sistemi</h3>
+      <p>Fren tertibatı, hava sistemleri, disk ve balata değişimi.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+    <div class="hizmet-card">
+      <div class="icon">🔋</div>
+      <h3>Elektrik Sistemleri</h3>
+      <p>Akü, alternatör, marş motoru ve araç elektrik arızaları.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+    <div class="hizmet-card">
+      <div class="icon">🚛</div>
+      <h3>7/24 Yol Yardımı</h3>
+      <p>Türkiye geneli mobil servis. Arıza anında yanınızdayız.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+    <div class="hizmet-card">
+      <div class="icon">🔩</div>
+      <h3>Yedek Parça & Bakım</h3>
+      <p>Orijinal ve muadil yedek parça tedariki, periyodik bakım hizmetleri.</p>
+      <a href="hizmetler.html">Detaylı Bilgi →</a>
+    </div>
+  </div>
+</div>
+
+<!-- MARKA — MERCEDES -->
+<div class="section">
+  <div class="sec-heading center">
+    <h2>Uzman Olduğumuz Marka</h2>
+    <p>20 yılı aşkın tecrübemizle Mercedes ağır vasıtalarda derinlemesine uzmanlaştık.</p>
+  </div>
+  <div class="mercedes-block">
+    <div class="mercedes-left">
+      <div class="m-eyebrow">Yetkili Servise Alternatif</div>
+      <div class="m-logo">Mercedes</div>
+      <div class="m-sub">Benz Ağır Vasıta<br>Teknik Uzmanlığı</div>
+    </div>
+    <div class="mercedes-right">
+      <div>
+        <div class="m-title">Hizmet Verdiğimiz Modeller</div>
+        <div class="mercedes-models">
+          <span class="m-model-tag">Actros</span>
+          <span class="m-model-tag">Travego</span>
+          <span class="m-model-tag">Atego</span>
+          <span class="m-model-tag">Axor</span>
+          <span class="m-model-tag">Tourismo</span>
+        </div>
+      </div>
+      <div class="m-note">
+        ⭐ Yalnızca Mercedes'e odaklanarak yetkili servisle aynı kalitede; ancak çok daha hızlı ve uygun maliyetli hizmet sunuyoruz. Motor, şanzıman, diferansiyel ve elektrik sistemlerinde derin uzmanlık.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div>
+    <h3>Ağır Vasıta Bizim İşimiz!</h3>
+    <p>Hemen arayın, ekibimiz yola çıksın. 7/24 hizmet.</p>
+  </div>
+  <a href="tel:+905323512420" class="cta-strip-num">📞 0532 351 24 20</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Uğur Usta Otomotiv</strong>
+      <p>Mercedes araçlarına motor, şanzıman, diferansiyel ve fren sistemi tamiri ve bakımı yapıyoruz. 7/24 yol yardımı hizmetimiz mevcuttur.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Hızlı Bağlantılar</h4>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <p>
+        📍 Vakıfgeçitveren Merkez Mevid İzzet Baysal Küçük Sanayi Sitesi H Blok No:9/14<br>Merkez / Bolu<br><br>
+        <a href="tel:+903742438160">📞 0374 243 81 60</a><br>
+        <a href="tel:+905323512420">📞 0532 351 24 20</a><br>
+        <a href="mailto:muhasebe@ugurusta.com.tr">✉ muhasebe@ugurusta.com.tr</a><br>
+        <a href="mailto:bilgi@ugurusta.com.tr">✉ bilgi@ugurusta.com.tr</a><br><br>
+        Pzt–Cmt: 08:30–18:00<br>Yol Yardım: 7/24 Açık
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">Copyright © 2025 - WEBADASI Bilgi Teknolojileri - Tüm hakları saklıdır.</span>
+    <span class="footer-copy">Merkez / Bolu</span>
+  </div>
+</footer>
+
+<a href="tel:+905323512420" class="yol-yardim-btn">🚨 7/24 YOL YARDIM</a>
+
+<script>
+  const hb = document.getElementById('hb'), mn = document.getElementById('mn');
+  hb.addEventListener('click', () => { hb.classList.toggle('open'); mn.classList.toggle('open'); });
+  mn.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { hb.classList.remove('open'); mn.classList.remove('open'); }));
+
+  const track = document.getElementById('sliderTrack');
+  const slides = track.querySelectorAll('.slide');
+  const dotsEl = document.getElementById('sDots');
+  let cur = 0, timer;
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+  function goTo(n) {
+    cur = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dotsEl.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 5000);
+  }
+  document.getElementById('sPrev').addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('sNext').addEventListener('click', () => goTo(cur + 1));
+  timer = setInterval(() => goTo(cur + 1), 5000);
+</script>
+</body>
+</html>

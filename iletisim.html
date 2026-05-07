@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İletişim – Uğur Usta Otomotiv</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── İLETİŞİM BİLGİ KARTLARI ── */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .contact-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      padding: 24px 20px;
+      border-radius: 4px;
+    }
+    .contact-card .cc-icon {
+      font-size: 26px;
+      margin-bottom: 12px;
+    }
+    .contact-card .cc-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .contact-card .cc-value {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.75;
+    }
+    .contact-card .cc-value a {
+      color: var(--text);
+      transition: color .2s;
+    }
+    .contact-card .cc-value a:hover {
+      color: var(--green);
+    }
+
+    /* ── ÇALIŞMA SAATLERİ + HADİSE ── */
+    .contact-bottom {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .hours-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      padding: 24px 20px;
+      border-radius: 4px;
+    }
+    .hours-card h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 14px;
+    }
+    .hours-table { width: 100%; border-collapse: collapse; }
+    .hours-table tr { border-bottom: 1px solid var(--border); }
+    .hours-table tr:last-child { border-bottom: none; }
+    .hours-table td {
+      font-size: 13px;
+      padding: 7px 0;
+      color: var(--muted);
+    }
+    .hours-table td:last-child {
+      text-align: right;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .hours-table tr.closed td { color: #bbb; }
+    .badge-247 {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 2px;
+    }
+
+    .address-card {
+      background: var(--offwhite);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--green);
+      padding: 24px 20px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .address-card h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 10px;
+    }
+    .address-card p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+      font-weight: 500;
+    }
+    .address-card .maps-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--green);
+      transition: opacity .2s;
+    }
+    .address-card .maps-link:hover { opacity: .7; }
+
+    /* ── HARİTA ── */
+    .map-wrap {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      height: 420px;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 960px) {
+      .contact-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .contact-bottom { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .contact-cards { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 380px) {
+      .contact-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <span>📍 Merkez / Bolu</span>
+    <span>🕐 Pzt–Cmt 08:30–18:00 | Yol Yardım 7/24</span>
+    <span>✉ muhasebe@ugurusta.com.tr</span>
+    <span>✉ bilgi@ugurusta.com.tr</span>
+
+  </div>
+  <div class="topbar-right"><a href="tel:+905323512420">📞 0532 351 24 20</a></div>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-box">🔧</div>
+      <div class="nav-logo-text">
+        <strong>Uğur Usta Otomotiv</strong>
+        <span>Ağır Vasıta Teknik Servis</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Ana Sayfa</a></li>
+      <li><a href="hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+      <li><a href="iletisim.html" class="active">İletişim</a></li>
+      <li><a href="tel:+905323512420" class="nav-tel">📞 0532 351 24 20</a></li>
+    </ul>
+    <button class="hamburger" id="hb"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-nav" id="mn">
+    <a href="index.html">Ana Sayfa</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+    <a href="hizmetler.html">Hizmetlerimiz</a>
+    <a href="iletisim.html">İletişim</a>
+    <a href="tel:+905323512420">📞 0532 351 24 20</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>İletişim</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Ana Sayfa</a>
+      <span>›</span>
+      <span>İletişim</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+
+  <!-- İLETİŞİM BİLGİ KARTLARI -->
+  <div class="sec-heading">
+    <h2>İletişim Bilgileri</h2>
+  </div>
+
+  <div class="contact-cards">
+    <div class="contact-card">
+      <div class="cc-icon">📞</div>
+      <div class="cc-label">Telefon</div>
+      <div class="cc-value">
+        <a href="tel:+905323512420"><strong>0532 351 24 20</strong></a><br>
+        <a href="tel:+903742438160">0374 243 81 60</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="cc-icon">💬</div>
+      <div class="cc-label">WhatsApp</div>
+      <div class="cc-value">
+        <a href="https://wa.me/905323512420" target="_blank"><strong>0532 351 24 20</strong></a><br>
+        <span style="font-size:12px; color:var(--muted);">Mesaj gönderin, hemen dönelim.</span>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="cc-icon">✉️</div>
+      <div class="cc-label">E-Posta</div>
+      <div class="cc-value">
+        <a href="mailto:muhasebe@ugurusta.com.tr">muhasebe@ugurusta.com.tr</a><br>
+        <a href="mailto:bilgi@ugurusta.com.tr">bilgi@ugurusta.com.tr</a>
+      </div>
+    </div>
+
+    <div class="contact-card">
+      <div class="cc-icon">📍</div>
+      <div class="cc-label">Adres</div>
+      <div class="cc-value">
+        İzzet Baysal Küçük Sanayi Sitesi<br>
+        H Blok No:9/14<br>
+        Merkez / Bolu
+      </div>
+    </div>
+  </div>
+
+  <!-- ÇALIŞMA SAATLERİ + ADRES -->
+  <div class="contact-bottom">
+    <div class="hours-card">
+      <h4>🕐 Çalışma Saatleri</h4>
+      <table class="hours-table">
+        <tr><td>Pazartesi</td><td>08:30 – 18:00</td></tr>
+        <tr><td>Salı</td><td>08:30 – 18:00</td></tr>
+        <tr><td>Çarşamba</td><td>08:30 – 18:00</td></tr>
+        <tr><td>Perşembe</td><td>08:30 – 18:00</td></tr>
+        <tr><td>Cuma</td><td>08:30 – 18:00</td></tr>
+        <tr><td>Cumartesi</td><td>08:30 – 18:00</td></tr>
+        <tr class="closed"><td>Pazar</td><td>Kapalı</td></tr>
+      </table>
+      <div class="badge-247">🚨 Yol Yardım 7/24 Açık</div>
+    </div>
+
+    <div class="address-card">
+      <div>
+        <h4>📍 Adresimiz</h4>
+        <p>
+          Vakıfgeçitveren Merkez Mevid<br>
+          İzzet Baysal Küçük Sanayi Sitesi<br>
+          H Blok No:9/14<br>
+          Merkez / <strong>Bolu</strong>
+        </p>
+      </div>
+      <a
+        href="https://maps.google.com/?q=İzzet+Baysal+Küçük+Sanayi+Sitesi+Bolu"
+        target="_blank"
+        class="maps-link"
+      >
+        📌 Google Maps'te Aç →
+      </a>
+    </div>
+  </div>
+
+  <!-- HARİTA -->
+  <div class="sec-heading">
+    <h2>Konumumuz</h2>
+  </div>
+  <div class="map-wrap">
+    <!--
+      ▼ Gerçek harita için:
+        maps.google.com → adresinizi arayın → Paylaş → Haritayı Göm
+        → çıkan <iframe> kodunu buraya yapıştırın.
+    -->
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.0!2d31.606!3d40.735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzA2LjAiTiAzMcKwMzYnMjEuNiJF!5e0!3m2!1str!2str!4v1700000000000"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Uğur Usta Otomotiv Konum">
+    </iframe>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="cta-strip">
+  <div>
+    <h3>Acil Yol Yardımı mı?</h3>
+    <p>Hemen arayın, ekibimiz yola çıksın. 7/24 hizmet.</p>
+  </div>
+  <a href="tel:+905323512420" class="cta-strip-num">📞 0532 351 24 20</a>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <strong>Uğur Usta Otomotiv</strong>
+      <p>Mercedes araçlarına motor, şanzıman, diferansiyel ve fren sistemi tamiri ve bakımı yapıyoruz. 7/24 yol yardımı hizmetimiz mevcuttur.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Hızlı Bağlantılar</h4>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="hizmetler.html">Hizmetlerimiz</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <p>
+        📍 Vakıfgeçitveren Merkez Mevid İzzet Baysal Küçük Sanayi Sitesi H Blok No:9/14<br>Merkez / Bolu<br><br>
+        <a href="tel:+903742438160">📞 0374 243 81 60</a><br>
+        <a href="tel:+905323512420">📞 0532 351 24 20</a><br>
+        <a href="mailto:muhasebe@ugurusta.com.tr">✉ muhasebe@ugurusta.com.tr</a><br>
+        <a href="mailto:bilgi@ugurusta.com.tr">✉ bilgi@ugurusta.com.tr</a><br><br>
+        Pzt–Cmt: 08:30–18:00<br>Yol Yardım: 7/24 Açık
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">Copyright © 2025 - WEBADASI Bilgi Teknolojileri - Tüm hakları saklıdır.</span>
+    <span class="footer-copy">Merkez / Bolu</span>
+  </div>
+</footer>
+
+<a href="tel:+905323512420" class="yol-yardim-btn">🚨 7/24 YOL YARDIM</a>
+
+<script>
+  const hb = document.getElementById('hb'), mn = document.getElementById('mn');
+  hb.addEventListener('click', () => { hb.classList.toggle('open'); mn.classList.toggle('open'); });
+  mn.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    hb.classList.remove('open'); mn.classList.remove('open');
+  }));
+</script>
+</body>
+</html>
